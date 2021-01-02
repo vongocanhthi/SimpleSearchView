@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red">#ff0000</color>
+    <color name="yellow">#ffea00</color>
+    <color name="green">#7aff00</color>
+    <color name="light_blue">#00fffb</color>
+    <color name="blue">#0336FF</color>
+    <color name="blue_light">#0AAAFF</color>
+    <color name="minor">#bbe1fa</color>
+    <color name="divider_black">#1F000000</color>
+    <color name="divider_while">#33FFFFFF</color>
+</resources>

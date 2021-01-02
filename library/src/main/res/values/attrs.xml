@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SimpleSearchView">
+        <attr name="ssv_hint" format="string">Search hint...</attr>
+    </declare-styleable>
+</resources>
