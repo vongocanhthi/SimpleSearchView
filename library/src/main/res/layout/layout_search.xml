@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="ContentDescription,RtlSymmetry">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -23,8 +24,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/imgLeftAction"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="12dp"
                     android:src="@drawable/ic_search_black" />
 
@@ -33,20 +36,26 @@
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:autofillHints=""
                     android:background="@android:color/transparent"
-                    android:hint="Search..."
+                    android:hint="@string/search"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
                     android:paddingStart="20dp"
-                    android:paddingLeft="20dp" />
+                    android:paddingLeft="20dp"
+                    android:singleLine="true" />
 
                 <ImageView
-                    android:id="@+id/imgClear"
+                    android:id="@+id/imgRightAction"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="12dp"
                     android:src="@drawable/ic_clear_black" />
             </LinearLayout>
 
             <View
+                android:id="@+id/viewDivider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/divider_black"

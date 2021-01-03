@@ -1,6 +1,6 @@
-package com.vnat.library.listeners;
+package com.vnat.library.listener;
 
-public interface OnQueryTextListener {
+public interface OnQueryTextChangeListener {
     void onQueryTextChange(String queryText);
     void onQueryTextSubmit(String queryText);
 }

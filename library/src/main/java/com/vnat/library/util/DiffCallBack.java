@@ -1,4 +1,4 @@
-package com.vnat.library.utils;
+package com.vnat.library.util;
 
 import android.annotation.SuppressLint;
 
