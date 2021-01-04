@@ -1,4 +1,4 @@
-# Simple Search View
+# Simple Search View [![](https://jitpack.io/v/vongocanhthi/SimpleSearchView.svg)](https://jitpack.io/#vongocanhthi/SimpleSearchView)
 
 <img src="https://i.imgur.com/sPDiXWM.gif" width="260" height="426" />
 
