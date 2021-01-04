@@ -13,9 +13,7 @@
         android:layout_height="wrap_content"
         app:ssv_cursorVisible="true"
         app:ssv_hint="Search"
-        app:ssv_text=""
         app:ssv_textColor="@color/black"
-        app:ssv_textColorHint="@color/hint"
-        app:ssv_textSize="18sp" />
+        app:ssv_textColorHint="@color/hint" />
 
 </LinearLayout>

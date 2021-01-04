@@ -176,7 +176,7 @@ public class SimpleSearchView extends LinearLayout implements
     }
 
     public void setSearchTextSize(float size) {
-        mBinding.edtSearch.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
+        mBinding.edtSearch.setTextSize(size);
     }
 
     public void setSearchCursorVisible(boolean visible) {
