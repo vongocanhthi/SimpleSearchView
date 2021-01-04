@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SimpleSearchView">
-        <attr name="ssv_hint" format="string">Search hint...</attr>
+        <attr name="ssv_hint" format="string" />
+        <attr name="ssv_textColorHint" format="color" />
+        <attr name="ssv_text" format="string" />
+        <attr name="ssv_textColor" format="color" />
+        <attr name="ssv_textSize" format="dimension" />
+        <attr name="ssv_cursorVisible" format="boolean" />
     </declare-styleable>
+
 </resources>

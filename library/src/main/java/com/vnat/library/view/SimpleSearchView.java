@@ -1,6 +1,8 @@
 package com.vnat.library.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,14 +15,17 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 
 import com.vnat.library.R;
 import com.vnat.library.databinding.LayoutSearchBinding;
+import com.vnat.library.listener.OnActionIconListener;
 import com.vnat.library.listener.OnSuggestionIconChangeListener;
 import com.vnat.library.listener.OnSuggestionListener;
 import com.vnat.library.listener.OnQueryTextChangeListener;
 import com.vnat.library.util.Constant;
 import com.vnat.library.util.DiffCallBack;
+import com.vnat.library.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,51 +41,85 @@ public class SimpleSearchView extends LinearLayout implements
     private List<String> mSuggestionList = new ArrayList<>();
     private List<String> mNewSuggestionList;
 
-
     private OnQueryTextChangeListener onQueryTextChangeListener;
     private OnSuggestionListener onSuggestionListener;
+    private OnActionIconListener onActionIconListener;
 
-    private String mQueryText = "";
-    private String TAG = "zzz";
     private int mResIdLeftSuggeston = 0;
     private int mResIdRightSuggeston = 0;
+    private String mQueryText = "";
+    private String mHint;
+    private boolean mCursorVisible = Constant.ATTRS_FOCUS_ON_EDITTEXT;
+    private String TAG = "zzz";
+
 
     public SimpleSearchView(Context context) {
         super(context);
-        init();
+        init(null);
     }
 
     public SimpleSearchView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
     public SimpleSearchView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public SimpleSearchView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
+        init(attrs);
     }
 
-    private void init() {
+    private void init(AttributeSet attrs) {
         inflate(getContext(), R.layout.layout_search, this);
         mBinding = LayoutSearchBinding.bind(this);
         mAdapter = new SuggestionAdapter(new DiffCallBack<>());
 
         initListeners();
 
+        applyXmlAttributes(attrs);
+    }
+
+    private void applyXmlAttributes(AttributeSet attrs) {
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SimpleSearchView);
+
+        try {
+            setSearchHint(typedArray.getString(R.styleable.SimpleSearchView_ssv_hint));
+            setSearchHintTextColor(typedArray.getColor(R.styleable.SimpleSearchView_ssv_textColorHint,
+                    Util.getColor(getContext(), R.color.hint)));
+            setSearchText(typedArray.getString(R.styleable.SimpleSearchView_ssv_text));
+            setSearchTextColor(typedArray.getColor(R.styleable.SimpleSearchView_ssv_textColor,
+                    Util.getColor(getContext(), R.color.black)));
+            setSearchTextSize(typedArray.getDimensionPixelSize(R.styleable.SimpleSearchView_ssv_textSize,
+                    Constant.ATTRS_TEXT_SIZE_SP_DEFAULT));
+            setSearchCursorVisible(typedArray.getBoolean(R.styleable.SimpleSearchView_ssv_cursorVisible,
+                    Constant.ATTRS_FOCUS_ON_EDITTEXT));
+
+        } finally {
+            typedArray.recycle();
+        }
     }
 
     private void initListeners() {
         mAdapter.setOnSuggestionListener(this);
         mAdapter.setOnSuggestionIconChangeListener(this);
 
-        mBinding.imgLeftAction.setOnClickListener(v -> mBinding.edtSearch.setText(""));
-        mBinding.imgRightAction.setOnClickListener(v -> mBinding.edtSearch.setText(""));
+        mBinding.imgLeftAction.setOnClickListener(v -> {
+            if (onActionIconListener != null){
+                onActionIconListener.onActionIconLeft();
+            }
+        });
+        mBinding.imgRightAction.setOnClickListener(v -> {
+            if (onActionIconListener != null){
+                onActionIconListener.onActionIconRight();
+            }else {
+                mBinding.edtSearch.setText("");
+            }
+        });
 
         mBinding.edtSearch.addTextChangedListener(this);
         mBinding.edtSearch.setOnEditorActionListener((v, actionId, event) -> {
@@ -91,15 +130,6 @@ public class SimpleSearchView extends LinearLayout implements
                 return true;
             }
             return false;
-        });
-
-        mBinding.edtSearch.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                Toast.makeText(getContext(), "focus", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getContext(), "no focus", Toast.LENGTH_SHORT).show();
-
-            }
         });
 
     }
@@ -130,7 +160,8 @@ public class SimpleSearchView extends LinearLayout implements
      * Set style
      */
     public void setSearchHint(String hint) {
-        mBinding.edtSearch.setHint(hint);
+//        mHint = hint != null ? hint : getContext().getString(R.string.search);
+        mBinding.edtSearch.setHint(hint != null ? hint : getContext().getString(R.string.search));
     }
 
     public void setSearchHintTextColor(int color) {
@@ -150,7 +181,8 @@ public class SimpleSearchView extends LinearLayout implements
     }
 
     public void setSearchCursorVisible(boolean visible) {
-        mBinding.edtSearch.setCursorVisible(visible);
+        mCursorVisible = visible ? visible : !mCursorVisible;
+        mBinding.edtSearch.setCursorVisible(mCursorVisible);
     }
 
     /**
@@ -188,6 +220,10 @@ public class SimpleSearchView extends LinearLayout implements
 
     public void setOnSuggestionListener(OnSuggestionListener onSuggestionListener) {
         this.onSuggestionListener = onSuggestionListener;
+    }
+
+    public void setOnActionIconListener(OnActionIconListener onActionIconListener) {
+        this.onActionIconListener = onActionIconListener;
     }
 
     /**
@@ -234,9 +270,9 @@ public class SimpleSearchView extends LinearLayout implements
     public void onSuggestionRightIconClick(int position) {
         if (onSuggestionListener != null) {
             onSuggestionListener.onSuggestionRightIconClick(position);
+        }else {
+            mBinding.edtSearch.setText(mNewSuggestionList.get(position).toLowerCase());
         }
-
-        mBinding.edtSearch.setText(mNewSuggestionList.get(position).toLowerCase());
     }
 
     @Override

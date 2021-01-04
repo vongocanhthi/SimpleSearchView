@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
+import com.vnat.library.listener.OnActionIconListener;
 import com.vnat.library.listener.OnQueryTextChangeListener;
 import com.vnat.library.listener.OnSuggestionListener;
 import com.vnat.simplesearchview.databinding.ActivityMainBinding;
@@ -37,60 +39,70 @@ public class MainActivity extends AppCompatActivity {
     private void listener() {
         mBinding.simpleSearchView.submitSuggestionList(mSuggestionList);
 
-//        mBinding.simpleSearchView.setOnQueryTextChangeListener(new OnQueryTextChangeListener() {
-//            @Override
-//            public void onQueryTextChange(String queryText) {
-//
-//            }
-//
-//            @Override
-//            public void onQueryTextSubmit(String queryText) {
-//
-//            }
-//        });
+        mBinding.simpleSearchView.setOnQueryTextChangeListener(new OnQueryTextChangeListener() {
+            @Override
+            public void onQueryTextChange(String queryText) {
+//                ...
+            }
 
-//        mBinding.simpleSearchView.setOnSuggestionListener(new OnSuggestionListener() {
-//            @Override
-//            public void onSuggestionClick(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onSuggestionLongClick(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onSuggestionRightIconClick(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onSuggestionRightIconLongClick(int position) {
-//
-//            }
-//        });
+            @Override
+            public void onQueryTextSubmit(String queryText) {
+//                ...
+            }
+        });
 
-//        mBinding.simpleSearchView.seO
+        mBinding.simpleSearchView.setOnSuggestionListener(new OnSuggestionListener() {
+            @Override
+            public void onSuggestionClick(int position) {
+
+            }
+
+            @Override
+            public void onSuggestionLongClick(int position) {
+
+            }
+
+            @Override
+            public void onSuggestionRightIconClick(int position) {
+
+            }
+
+            @Override
+            public void onSuggestionRightIconLongClick(int position) {
+
+            }
+        });
+
+        mBinding.simpleSearchView.setOnActionIconListener(new OnActionIconListener() {
+            @Override
+            public void onActionIconLeft() {
+
+            }
+
+            @Override
+            public void onActionIconRight() {
+
+            }
+        });
 
     }
 
     private void setIcon() {
-//        mBinding.simpleSearchView.setLeftSuggestionIcon(R.drawable.ic_clear_black);
-//        mBinding.simpleSearchView.setRightSuggestionIcon(R.drawable.ic_arrow_up_left_black);
-//
-//        mBinding.simpleSearchView.setLeftActionIcon(R.drawable.ic_search_black);
-//        mBinding.simpleSearchView.setRightActionIcon(R.drawable.ic_clear_black);
+        mBinding.simpleSearchView.setLeftSuggestionIcon(R.drawable.ic_search_black);
+        mBinding.simpleSearchView.setRightSuggestionIcon(R.drawable.ic_arrow_up_left_black);
+
+        mBinding.simpleSearchView.setLeftActionIcon(R.drawable.ic_search_black);
+        mBinding.simpleSearchView.setRightActionIcon(R.drawable.ic_clear_black);
     }
 
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        if (getCurrentFocus() != null) {
-//            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-//        }
-//        return super.dispatchTouchEvent(ev);
-//    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
     private void initList() {
         mSuggestionList.add("Mouse");
