@@ -1,6 +1,6 @@
 # Simple Search View
 
-https://user-images.githubusercontent.com/44198578/103509273-53ebfb80-4e95-11eb-8ecc-33c6869564bd.mp4
+![https://user-images.githubusercontent.com/44198578/103509273-53ebfb80-4e95-11eb-8ecc-33c6869564bd.mp4](https://i.imgur.com/sPDiXWM.gif)
 
 # Installation
 **Step 1**. Add the JitPack repository to your build file
