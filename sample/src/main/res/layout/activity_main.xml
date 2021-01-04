@@ -11,11 +11,11 @@
         android:id="@+id/simpleSearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:ssv_cursorVisible="true"
         app:ssv_hint="Search"
-        app:ssv_textColorHint="#808080"
         app:ssv_text=""
-        app:ssv_textColor="#000000"
-        app:ssv_textSize="18sp"
-        app:ssv_cursorVisible="true"/>
+        app:ssv_textColor="@color/black"
+        app:ssv_textColorHint="@color/hint"
+        app:ssv_textSize="18sp" />
 
 </LinearLayout>
