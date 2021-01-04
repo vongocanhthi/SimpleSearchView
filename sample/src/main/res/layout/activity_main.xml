@@ -10,6 +10,12 @@
     <com.vnat.library.view.SimpleSearchView
         android:id="@+id/simpleSearchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:ssv_hint="Search"
+        app:ssv_textColorHint="#808080"
+        app:ssv_text=""
+        app:ssv_textColor="#000000"
+        app:ssv_textSize="18sp"
+        app:ssv_cursorVisible="true"/>
 
 </LinearLayout>

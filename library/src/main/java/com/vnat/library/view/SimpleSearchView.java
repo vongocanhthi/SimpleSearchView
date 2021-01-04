@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,7 +49,6 @@ public class SimpleSearchView extends LinearLayout implements
     private int mResIdLeftSuggeston = 0;
     private int mResIdRightSuggeston = 0;
     private String mQueryText = "";
-    private String mHint;
     private boolean mCursorVisible = Constant.ATTRS_FOCUS_ON_EDITTEXT;
     private String TAG = "zzz";
 
@@ -160,7 +160,6 @@ public class SimpleSearchView extends LinearLayout implements
      * Set style
      */
     public void setSearchHint(String hint) {
-//        mHint = hint != null ? hint : getContext().getString(R.string.search);
         mBinding.edtSearch.setHint(hint != null ? hint : getContext().getString(R.string.search));
     }
 
@@ -177,7 +176,7 @@ public class SimpleSearchView extends LinearLayout implements
     }
 
     public void setSearchTextSize(float size) {
-        mBinding.edtSearch.setTextSize(size);
+        mBinding.edtSearch.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
     }
 
     public void setSearchCursorVisible(boolean visible) {
