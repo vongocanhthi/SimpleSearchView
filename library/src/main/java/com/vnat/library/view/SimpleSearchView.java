@@ -95,7 +95,7 @@ public class SimpleSearchView extends LinearLayout implements
             setSearchTextColor(typedArray.getColor(R.styleable.SimpleSearchView_ssv_textColor,
                     Util.getColor(getContext(), R.color.black)));
             setSearchTextSize(typedArray.getDimensionPixelSize(R.styleable.SimpleSearchView_ssv_textSize,
-                    Constant.ATTRS_TEXT_SIZE_SP_DEFAULT));
+                    Util.spToPx(Constant.ATTRS_TEXT_SIZE_SP_DEFAULT)));
             setSearchCursorVisible(typedArray.getBoolean(R.styleable.SimpleSearchView_ssv_cursorVisible,
                     Constant.ATTRS_FOCUS_ON_EDITTEXT));
 
@@ -109,14 +109,14 @@ public class SimpleSearchView extends LinearLayout implements
         mAdapter.setOnSuggestionIconChangeListener(this);
 
         mBinding.imgLeftAction.setOnClickListener(v -> {
-            if (onActionIconListener != null){
+            if (onActionIconListener != null) {
                 onActionIconListener.onActionIconLeft();
             }
         });
         mBinding.imgRightAction.setOnClickListener(v -> {
-            if (onActionIconListener != null){
+            if (onActionIconListener != null) {
                 onActionIconListener.onActionIconRight();
-            }else {
+            } else {
                 mBinding.edtSearch.setText("");
             }
         });
@@ -177,6 +177,10 @@ public class SimpleSearchView extends LinearLayout implements
 
     public void setSearchTextSize(float size) {
         mBinding.edtSearch.setTextSize(size);
+    }
+
+    private void setSearchTextSize(int px) {
+        mBinding.edtSearch.setTextSize(TypedValue.COMPLEX_UNIT_PX, px);
     }
 
     public void setSearchCursorVisible(boolean visible) {
@@ -269,7 +273,7 @@ public class SimpleSearchView extends LinearLayout implements
     public void onSuggestionRightIconClick(int position) {
         if (onSuggestionListener != null) {
             onSuggestionListener.onSuggestionRightIconClick(position);
-        }else {
+        } else {
             mBinding.edtSearch.setText(mNewSuggestionList.get(position).toLowerCase());
         }
     }
