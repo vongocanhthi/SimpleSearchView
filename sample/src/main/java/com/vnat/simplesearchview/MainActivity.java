@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onQueryTextSubmit(String queryText) {
 //                ...
+
             }
         });
 
@@ -89,11 +90,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setIcon() {
-//        mBinding.simpleSearchView.setLeftSuggestionIcon(R.drawable.ic_search_black);
-//        mBinding.simpleSearchView.setRightSuggestionIcon(R.drawable.ic_arrow_up_left_black);
-//
-//        mBinding.simpleSearchView.setLeftActionIcon(R.drawable.ic_search_black);
-//        mBinding.simpleSearchView.setRightActionIcon(R.drawable.ic_clear_black);
+        mBinding.simpleSearchView.setLeftSuggestionIconChange(R.drawable.ic_search_black);
+        mBinding.simpleSearchView.setRightSuggestionIconChange(R.drawable.ic_arrow_up_left_black);
+
+        mBinding.simpleSearchView.setLeftActionIconChange(R.drawable.ic_search_black);
+        mBinding.simpleSearchView.setRightActionIconChange(R.drawable.ic_clear_black);
     }
 
     @Override
