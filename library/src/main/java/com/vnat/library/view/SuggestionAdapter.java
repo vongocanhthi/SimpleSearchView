@@ -74,10 +74,6 @@ public class SuggestionAdapter extends ListAdapter<String, SuggestionAdapter.Sim
             });
 
             binding.imgRightIcon.setOnClickListener(v -> onSuggestionListener.onSuggestionRightIconClick(getAdapterPosition()));
-            binding.imgRightIcon.setOnLongClickListener(v -> {
-                onSuggestionListener.onSuggestionRightIconLongClick(getAdapterPosition());
-                return false;
-            });
 
             onSuggestionIconChangeListener.onLeftSuggestionIconChange(binding.imgLeftIcon);
             onSuggestionIconChangeListener.onRightSuggestionIconChange(binding.imgRightIcon);

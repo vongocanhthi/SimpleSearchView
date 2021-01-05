@@ -53,27 +53,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        mBinding.simpleSearchView.setOnSuggestionListener(new OnSuggestionListener() {
-//            @Override
-//            public void onSuggestionClick(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onSuggestionLongClick(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onSuggestionRightIconClick(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onSuggestionRightIconLongClick(int position) {
-//
-//            }
-//        });
+        mBinding.simpleSearchView.setOnSuggestionListener(new OnSuggestionListener() {
+            @Override
+            public void onSuggestionClick(int position) {
+
+            }
+
+            @Override
+            public void onSuggestionLongClick(int position) {
+
+            }
+
+            @Override
+            public void onSuggestionRightIconClick(int position) {
+
+            }
+
+        });
 
 //        mBinding.simpleSearchView.setOnActionIconListener(new OnActionIconListener() {
 //            @Override

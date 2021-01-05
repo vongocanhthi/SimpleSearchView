@@ -193,18 +193,7 @@ public class SimpleSearchView extends LinearLayout{
 
             @Override
             public void onSuggestionRightIconClick(int position) {
-                if (onSuggestionListener != null) {
-                    onSuggestionListener.onSuggestionRightIconClick(position);
-                } else {
-                    mBinding.edtSearch.setText(mNewSuggestionList.get(position).toLowerCase());
-                }
-            }
-
-            @Override
-            public void onSuggestionRightIconLongClick(int position) {
-                if (onSuggestionListener != null) {
-                    onSuggestionListener.onSuggestionRightIconLongClick(position);
-                }
+                mBinding.edtSearch.setText(mNewSuggestionList.get(position));
             }
         });
     }
@@ -215,7 +204,7 @@ public class SimpleSearchView extends LinearLayout{
         if (!query.isEmpty()) {
             for (String item : mSuggestionList) {
                 if (item.toLowerCase().contains(query.toLowerCase())) {
-                    mNewSuggestionList.add(item);
+                    mNewSuggestionList.add(item.toLowerCase());
                 }
             }
         }
