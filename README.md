@@ -8,16 +8,18 @@
 Add it in your root build.gradle at the end of repositories:
 
         allprojects {
-        	repositories {
-        		...
-        		maven { url 'https://jitpack.io' }
-        	}
+        repositories {
+        	...
+        	maven { url 'https://jitpack.io' }
+            }
         }
   
 **Step 2**. Add the dependency
 
+[![](https://jitpack.io/v/vongocanhthi/SimpleSearchView.svg)](https://jitpack.io/#vongocanhthi/SimpleSearchView)
+
         dependencies {
-        	implementation 'com.github.vongocanhthi:SimpleSearchView:1.0.0'
+            implementation 'com.github.vongocanhthi:SimpleSearchView:$version'
         }
 
 # Usage
