@@ -104,12 +104,12 @@ Add it in your root build.gradle at the end of repositories:
 ## Custom icons:
 
         // change icon action
-        simpleSearchView.setLeftSuggestionIcon(R.drawable.ic_search_black);
-        simpleSearchView.setRightSuggestionIcon(R.drawable.ic_arrow_up_left_black);
+        simpleSearchView.setLeftSuggestionIconChange(R.drawable.ic_search_black);
+        simpleSearchView.setRightSuggestionIconChange(R.drawable.ic_arrow_up_left_black);
 
         // change icon suggestion
-        simpleSearchView.setLeftActionIcon(R.drawable.ic_search_black);
-        simpleSearchView.setRightActionIcon(R.drawable.ic_clear_black);
+        simpleSearchView.setLeftActionIconChange(R.drawable.ic_search_black);
+        simpleSearchView.setRightActionIconChange(R.drawable.ic_clear_black);
       
      
 # License
