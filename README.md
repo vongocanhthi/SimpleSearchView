@@ -23,7 +23,14 @@ Add it in your root build.gradle at the end of repositories:
 # Usage
 ## XML:
 
-        <com.vnat.library.view.SimpleSearchView
+	<com.vnat.library.view.SimpleSearchView
+	    android:id="@+id/simpleSearchView"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"/>
+
+## Attribute
+
+	<com.vnat.library.view.SimpleSearchView
             android:id="@+id/simpleSearchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +40,7 @@ Add it in your root build.gradle at the end of repositories:
             app:ssv_textColor="@color/black"
             app:ssv_textColorHint="@color/hint"
             app:ssv_textSize="18sp" />
-            
+	    
 ## Submit Suggestion List:
 **First**, you should submit a list of suggestions in order to be able to query your search.
 
