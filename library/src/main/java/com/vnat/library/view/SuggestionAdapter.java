@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vnat.library.databinding.ItemSearchSuggestionBinding;
 import com.vnat.library.listener.OnSuggestionIconChangeListener;
 import com.vnat.library.listener.OnSuggestionListener;
+import com.vnat.library.listener.OnSuggestionRightIconListener;
 import com.vnat.library.util.Constant;
 
 import java.util.List;
@@ -19,9 +20,7 @@ import java.util.List;
 public class SuggestionAdapter extends ListAdapter<String, SuggestionAdapter.SimpleSearchViewViewHolder> {
     private OnSuggestionListener onSuggestionListener;
     private OnSuggestionIconChangeListener onSuggestionIconChangeListener;
-
-//    public static int LIMIT = 10;
-
+    private OnSuggestionRightIconListener onSuggestionRightIconListener;
 
     public SuggestionAdapter(@NonNull DiffUtil.ItemCallback<String> diffCallback) {
         super(diffCallback);
@@ -33,6 +32,10 @@ public class SuggestionAdapter extends ListAdapter<String, SuggestionAdapter.Sim
 
     public void setOnSuggestionIconChangeListener(OnSuggestionIconChangeListener onSuggestionIconChangeListener) {
         this.onSuggestionIconChangeListener = onSuggestionIconChangeListener;
+    }
+
+    public void setOnSuggestionRightIconListener(OnSuggestionRightIconListener onSuggestionRightIconListener) {
+        this.onSuggestionRightIconListener = onSuggestionRightIconListener;
     }
 
     @Override
@@ -67,13 +70,13 @@ public class SuggestionAdapter extends ListAdapter<String, SuggestionAdapter.Sim
         void bind(String s) {
             binding.txtSuggestion.setText(s.toLowerCase());
 
-            binding.layoutParent.setOnClickListener(v -> onSuggestionListener.onSuggestionClick(getAdapterPosition()));
+            binding.layoutParent.setOnClickListener(v -> onSuggestionListener.onSuggestionClick(getCurrentList().get(getAdapterPosition()), getAdapterPosition()));
             binding.layoutParent.setOnLongClickListener(v -> {
-                onSuggestionListener.onSuggestionLongClick(getAdapterPosition());
+                onSuggestionListener.onSuggestionLongClick(getCurrentList().get(getAdapterPosition()), getAdapterPosition());
                 return false;
             });
 
-            binding.imgRightIcon.setOnClickListener(v -> onSuggestionListener.onSuggestionRightIconClick(getAdapterPosition()));
+            binding.imgRightIcon.setOnClickListener(v -> onSuggestionRightIconListener.onClick(getAdapterPosition()));
 
             onSuggestionIconChangeListener.onLeftSuggestionIconChange(binding.imgLeftIcon);
             onSuggestionIconChangeListener.onRightSuggestionIconChange(binding.imgRightIcon);

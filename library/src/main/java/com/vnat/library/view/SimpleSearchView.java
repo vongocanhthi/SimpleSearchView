@@ -10,13 +10,15 @@ import android.util.TypedValue;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.lifecycle.MutableLiveData;
 
 import com.vnat.library.R;
 import com.vnat.library.databinding.LayoutSearchBinding;
-import com.vnat.library.listener.OnActionIconListener;
+import com.vnat.library.listener.OnActionLeftIconListener;
 import com.vnat.library.listener.OnQueryTextChangeListener;
 import com.vnat.library.listener.OnSuggestionIconChangeListener;
 import com.vnat.library.listener.OnSuggestionListener;
@@ -27,7 +29,7 @@ import com.vnat.library.util.Util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleSearchView extends LinearLayout{
+public class SimpleSearchView extends LinearLayout {
 
     private LayoutSearchBinding mBinding;
     private SuggestionAdapter mAdapter;
@@ -37,7 +39,7 @@ public class SimpleSearchView extends LinearLayout{
 
     private OnQueryTextChangeListener onQueryTextChangeListener;
     private OnSuggestionListener onSuggestionListener;
-    private OnActionIconListener onActionIconListener;
+    private OnActionLeftIconListener onActionLeftIconListener;
 
     private int mResIdLeftSuggeston = 0;
     private int mResIdRightSuggeston = 0;
@@ -73,8 +75,14 @@ public class SimpleSearchView extends LinearLayout{
         mAdapter = new SuggestionAdapter(new DiffCallBack<>());
 
         initListeners();
+        initEvents();
 
         applyXmlAttributes(attrs);
+    }
+
+    private void initEvents() {
+        mAdapter.setOnSuggestionRightIconListener(position -> mBinding.edtSearch.setText(mNewSuggestionList.get(position).toLowerCase()));
+
     }
 
     private void applyXmlAttributes(AttributeSet attrs) {
@@ -147,18 +155,18 @@ public class SimpleSearchView extends LinearLayout{
 
     private void handleActionClick() {
         mBinding.imgLeftAction.setOnClickListener(v -> {
-            if (onActionIconListener != null) {
-                onActionIconListener.onActionIconLeft();
+            if (onActionLeftIconListener != null) {
+                onActionLeftIconListener.onClick();
             }
+        });
+        mBinding.imgLeftAction.setOnLongClickListener(v -> {
+            if (onActionLeftIconListener != null) {
+                onActionLeftIconListener.onLongClick();
+            }
+            return false;
         });
 
-        mBinding.imgRightAction.setOnClickListener(v -> {
-            if (onActionIconListener != null) {
-                onActionIconListener.onActionIconRight();
-            } else {
-                mBinding.edtSearch.setText("");
-            }
-        });
+        mBinding.imgRightAction.setOnClickListener(v -> mBinding.edtSearch.setText(""));
     }
 
     private void handleSuggestionIconChange() {
@@ -178,22 +186,17 @@ public class SimpleSearchView extends LinearLayout{
     private void handleSuggestionClick() {
         mAdapter.setOnSuggestionListener(new OnSuggestionListener() {
             @Override
-            public void onSuggestionClick(int position) {
+            public void onSuggestionClick(String suggestionText, int position) {
                 if (onSuggestionListener != null) {
-                    onSuggestionListener.onSuggestionClick(position);
+                    onSuggestionListener.onSuggestionClick(suggestionText, position);
                 }
             }
 
             @Override
-            public void onSuggestionLongClick(int position) {
+            public void onSuggestionLongClick(String suggestionText, int position) {
                 if (onSuggestionListener != null) {
-                    onSuggestionListener.onSuggestionLongClick(position);
+                    onSuggestionListener.onSuggestionLongClick(suggestionText, position);
                 }
-            }
-
-            @Override
-            public void onSuggestionRightIconClick(int position) {
-                mBinding.edtSearch.setText(mNewSuggestionList.get(position));
             }
         });
     }
@@ -204,7 +207,7 @@ public class SimpleSearchView extends LinearLayout{
         if (!query.isEmpty()) {
             for (String item : mSuggestionList) {
                 if (item.toLowerCase().contains(query.toLowerCase())) {
-                    mNewSuggestionList.add(item.toLowerCase());
+                    mNewSuggestionList.add(item);
                 }
             }
         }
@@ -289,9 +292,8 @@ public class SimpleSearchView extends LinearLayout{
         this.onSuggestionListener = onSuggestionListener;
     }
 
-    public void setOnActionIconListener(OnActionIconListener onActionIconListener) {
-        this.onActionIconListener = onActionIconListener;
+    public void setOnActionLeftIconListener(OnActionLeftIconListener onActionLeftIconListener) {
+        this.onActionLeftIconListener = onActionLeftIconListener;
     }
-
 }
 

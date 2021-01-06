@@ -5,12 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.vnat.library.listener.OnActionIconListener;
+import com.vnat.library.listener.OnActionLeftIconListener;
 import com.vnat.library.listener.OnQueryTextChangeListener;
 import com.vnat.library.listener.OnSuggestionListener;
 import com.vnat.simplesearchview.databinding.ActivityMainBinding;
@@ -24,12 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String TAG = "zzz";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
+
+//        stringList = mBinding.simpleSearchView.getCurrentSuggestionList();
 
         initList();
         setIcon();
@@ -49,39 +49,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onQueryTextSubmit(String queryText) {
 //                ...
-
             }
         });
 
         mBinding.simpleSearchView.setOnSuggestionListener(new OnSuggestionListener() {
             @Override
-            public void onSuggestionClick(int position) {
-
+            public void onSuggestionClick(String suggestionText, int position) {
+//                ...
             }
 
             @Override
-            public void onSuggestionLongClick(int position) {
-
+            public void onSuggestionLongClick(String suggestionText, int position) {
+//                ...
             }
-
-            @Override
-            public void onSuggestionRightIconClick(int position) {
-
-            }
-
         });
 
-//        mBinding.simpleSearchView.setOnActionIconListener(new OnActionIconListener() {
-//            @Override
-//            public void onActionIconLeft() {
-//
-//            }
-//
-//            @Override
-//            public void onActionIconRight() {
-//
-//            }
-//        });
+        mBinding.simpleSearchView.setOnActionLeftIconListener(new OnActionLeftIconListener() {
+            @Override
+            public void onClick() {
+//                ...
+            }
+
+            @Override
+            public void onLongClick() {
+//                ...
+            }
+        });
 
     }
 
