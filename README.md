@@ -67,37 +67,27 @@ Add it in your root build.gradle at the end of repositories:
         
         simpleSearchView.setOnSuggestionListener(new OnSuggestionListener() {
             @Override
-            public void onSuggestionClick(int position) {
-
+            public void onSuggestionClick(String suggestionText, int position) {
+		// ...
             }
 
             @Override
-            public void onSuggestionLongClick(int position) {
-
-            }
-
-            @Override
-            public void onSuggestionRightIconClick(int position) {
-
-            }
-
-            @Override
-            public void onSuggestionRightIconLongClick(int position) {
-
+            public void onSuggestionLongClick(String suggestionText, int position) {
+		// ...
             }
         });
         
-### Listen to action events:
+### Listen to action left events:
 
-        simpleSearchView.setOnActionIconListener(new OnActionIconListener() {
+        simpleSearchView.setOnActionLeftIconListener(new OnActionLeftIconListener() {
             @Override
-            public void onActionIconLeft() {
-
+            public void onClick() {
+		// ...
             }
 
             @Override
-            public void onActionIconRight() {
-
+            public void onLongClick() {
+		// ...
             }
         });
 
