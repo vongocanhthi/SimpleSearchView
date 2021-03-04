@@ -24,6 +24,7 @@ import com.vnat.library.listener.OnSuggestionIconChangeListener;
 import com.vnat.library.listener.OnSuggestionListener;
 import com.vnat.library.util.Constant;
 import com.vnat.library.util.DiffCallBack;
+import com.vnat.library.util.NpaGridLayoutManager;
 import com.vnat.library.util.Util;
 
 import java.util.ArrayList;
@@ -73,6 +74,7 @@ public class SimpleSearchView extends LinearLayout {
         inflate(getContext(), R.layout.layout_search, this);
         mBinding = LayoutSearchBinding.bind(this);
         mAdapter = new SuggestionAdapter(new DiffCallBack<>());
+        mBinding.rcvSuggestion.setLayoutManager(new NpaGridLayoutManager(getContext(), 1));
 
         initListeners();
         initEvents();
